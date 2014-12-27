@@ -1,6 +1,5 @@
 <?php
-namespace Tests\Client;
-require_once '../../../vendor/autoload.php';
+namespace Tests\Client\BeerMapClient;
 use Client\BeerMapClient\BeerMapClient;
 use Response\BeerMapResponse;
 
@@ -38,7 +37,7 @@ class BeerMapClientBaseTest extends \PHPUnit_Framework_TestCase
             $apiUrl = 'http://beermapping.com/webservice/loccity'
         );
 
-        self :: $beerMapResponseFixture = file_get_contents('../Fixtures/BeerMapClientResponse.xml');
+        self :: $beerMapResponseFixture = file_get_contents('../../Fixtures/BeerMapClientResponse.xml');
         self :: $beerMapResponse = new BeerMapResponse(self :: $beerMapResponseFixture);
     }
 }

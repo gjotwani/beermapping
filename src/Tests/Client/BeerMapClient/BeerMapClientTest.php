@@ -1,6 +1,6 @@
 <?php
-namespace Tests\Client;
-require_once '../../../vendor/autoload.php';
+namespace Tests\Client\BeerMapClient;
+
 
 use Client\BeerMapClient\BeerMapClient;
 use Response\BeerMapResponse;

@@ -1,18 +1,16 @@
 <?php
+namespace Tests\Client;
 require_once '../../../vendor/autoload.php';
 
 use Client\BeerMapClient\BeerMapClient;
+use Response\BeerMapResponse;
 
-class BeerMapClientTest extends \PHPUnit_Framework_TestCase
+class BeerMapClientTest extends BeerMapClientBaseTest
 {
-    public static $client;
 
     public static function setUpBeforeClass()
     {
-        self :: $client = new BeerMapClient(
-            $apiKey = 'not-my-api-key',
-            $apiUrl = 'http://beermapping.com/webservice/loccity'
-        );
+        parent :: setUpBeforeClass();
     }
 
     /**
@@ -20,8 +18,8 @@ class BeerMapClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testClientType()
     {
-        $this->assertTrue(
-            self :: $client instanceof Client\BeerMapClient\BeerMapClient,
+        $this->assertEquals(
+            get_class(self :: $client), 'Client\BeerMapClient\BeerMapClient',
             'Client isnt of expected type Client\BeerMapClient\BeerMapClient'
         );
     }
@@ -67,6 +65,19 @@ class BeerMapClientTest extends \PHPUnit_Framework_TestCase
             self :: $client->getRequestUrl(),
             'http://beermapping.com/webservice/loccity/not-my-api-key/3212+duke+street',
             'Unexpeected request url'
+        );
+    }
+
+    /**
+     * Test Client BeerMap response object
+     */
+    public function testBeerMapResponse()
+    {
+        $this->assertNotNull(self :: $beerMapResponseFixture);
+
+        $this->assertEquals(
+            get_class(self :: $beerMapResponse), 'Response\BeerMapResponse',
+            'Response isnt of expected type Response\BeerMapResponse'
         );
     }
 }

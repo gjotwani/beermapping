@@ -1,4 +1,12 @@
 <?php
+
+/**
+ * A class that allows setting beermap request params
+ * and fetching a response from Beermap api
+ *
+ * @author Gaurav Jotwani <grjotwani@gmail.com>
+ */
+
 namespace Client\BeerMapClient;
 
 use Response\BeerMapResponse;

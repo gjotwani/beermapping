@@ -43,4 +43,18 @@ class BeerMapClientTest extends \PHPUnit_Framework_TestCase
             'Unexpeected api start url'
         );
     }
+
+    /**
+     * Test Client setLocation()
+     */
+    public function testSetLocation()
+    {
+        $location = '3212 duke street';
+        self :: $client->setLocation($location);
+        $this->assertEquals(
+            self :: $client->locationNameQuery,
+            $location,
+            'Unexpeected location query'
+        );
+    }
 }

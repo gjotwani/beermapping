@@ -16,13 +16,31 @@ class BeerMapClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test BeerMapClient init
+     * Test BeerMapClient Type
      */
-    public function testClientInit()
+    public function testClientType()
     {
         $this->assertTrue(
             self :: $client instanceof Client\BeerMapClient\BeerMapClient,
             'Client isnt of expected type Client\BeerMapClient\BeerMapClient'
+        );
+    }
+
+    /**
+     * Test Client params
+     */
+    public function testClientParams()
+    {
+        $this->assertEquals(
+            self :: $client->apiKey,
+            'not-my-api-key',
+            'Unexpeected api key'
+        );
+
+        $this->assertEquals(
+            self :: $client->apiUrl,
+            'http://beermapping.com/webservice/loccity',
+            'Unexpeected api start url'
         );
     }
 }

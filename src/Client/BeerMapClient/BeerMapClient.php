@@ -1,5 +1,6 @@
 <?php
 namespace Client\BeerMapClient;
+
 use Response\BeerMapResponse;
 
 class BeerMapClient implements BeerMapClientInterface
@@ -18,7 +19,7 @@ class BeerMapClient implements BeerMapClientInterface
 
     public function __get($name)
     {
-        return property_exists(__CLASS__, $name) ? $this->{$name} : FALSE;
+        return property_exists(__CLASS__, $name) ? $this->{$name} : false;
     }
 
     public function setLocation($locationNameQuery)

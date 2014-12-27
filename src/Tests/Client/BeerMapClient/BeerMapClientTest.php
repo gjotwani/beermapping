@@ -1,7 +1,6 @@
 <?php
 namespace Tests\Client\BeerMapClient;
 
-
 use Client\BeerMapClient\BeerMapClient;
 use Response\BeerMapResponse;
 

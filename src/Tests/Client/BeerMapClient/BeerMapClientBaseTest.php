@@ -41,6 +41,10 @@ class BeerMapClientBaseTest extends \PHPUnit_Framework_TestCase
         self :: $beerMapResponse = new BeerMapResponse(self :: $beerMapResponseFixture);
     }
 
+    /**
+     * Simply check if above
+     * fixtures are not null
+     */
     public function testFixturesNotNull()
     {
         $this->assertNotNull(self :: $client);

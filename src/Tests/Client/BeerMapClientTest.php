@@ -57,4 +57,16 @@ class BeerMapClientTest extends \PHPUnit_Framework_TestCase
             'Unexpeected location query'
         );
     }
+
+    /**
+     * Test Client getRequestUrl()
+     */
+    public function testgetRequestUrl()
+    {
+        $this->assertEquals(
+            self :: $client->getRequestUrl(),
+            'http://beermapping.com/webservice/loccity/not-my-api-key/3212+duke+street',
+            'Unexpeected request url'
+        );
+    }
 }

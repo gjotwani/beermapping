@@ -1,4 +1,4 @@
-<?
+<?php
 namespace Client;
 
 abstract Class ApiClient implements ApiClientInterface

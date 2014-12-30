@@ -1,4 +1,5 @@
-<?
+<?php
+
 namespace Client;
 
 interface ApiClientInterface

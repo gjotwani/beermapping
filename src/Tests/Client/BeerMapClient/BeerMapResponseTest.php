@@ -22,7 +22,7 @@ class BeerMapResponseTest extends BeerMapClientBaseTest
         $this->assertNotNull(self :: $beerMapResponseFixture);
 
         $this->assertEquals(
-            get_class(self :: $beerMapResponse), 'Response\BeerMapResponse',
+            get_class(self :: $beerMapResponse), 'Response\BeerMapClientResponse\BeerMapClientResponse',
             'Response isnt of expected type Response\BeerMapResponse'
         );
     }
@@ -32,6 +32,6 @@ class BeerMapResponseTest extends BeerMapClientBaseTest
      */
     public function testGetLocations()
     {
-        $this->assertGreaterThan(1, count(self :: $beerMapResponse->getLocations()));
+        $this->assertGreaterThan(1, count(self :: $beerMapResponse->getBreweries()));
     }
 }

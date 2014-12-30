@@ -9,24 +9,11 @@
 
 namespace Client\BeerMapClient;
 
-use Response\BeerMapResponse;
+use \Client\ApiClient;
+use \Response\BeerMapClientResponse\BeerMapClientResponse;
 
-class BeerMapClient implements BeerMapClientInterface
+class BeerMapClient extends ApiClient implements BeerMapClientInterface
 {
-    /**
-     * Apikey for beermapping
-     *
-     * @var string
-     */
-    private $apiKey;
-
-    /**
-     * Start url for beermapping
-     *
-     * @var string
-     */
-    private $apiUrl;
-
     /**
      * Url entered location query
      *
@@ -34,23 +21,7 @@ class BeerMapClient implements BeerMapClientInterface
      */
     private $locationNameQuery;
 
-    public function __construct($apiKey, $apiUrl)
-    {
-        $this->apiKey = $apiKey;
-        $this->apiUrl = $apiUrl;
-    }
-
-    /**
-     * Magic getter
-     * for class properties
-     *
-     * @param string $name property name
-     * @return mixed property value
-     */
-    public function __get($name)
-    {
-        return property_exists(__CLASS__, $name) ? $this->{$name} : false;
-    }
+    private $geoCodeClient;
 
     /**
      * Setter for
@@ -71,9 +42,16 @@ class BeerMapClient implements BeerMapClientInterface
      */
     public function getResponse()
     {
-        $rawResponse = $this->getRawResponse();
-        $responseObject = new BeerMapResponse($rawResponse);
+        $requestUrl = $this->getRequestUrl();
+        $rawResponse = $this->getRawResponse($requestUrl);
+        $responseObject = new BeerMapClientResponse($rawResponse, $this->geoCodeClient);
+
         return $responseObject;
+    }
+
+    public function setGeoCodeClient($geoCodeClient)
+    {
+        $this->geoCodeClient = $geoCodeClient;
     }
 
     /**
@@ -84,13 +62,5 @@ class BeerMapClient implements BeerMapClientInterface
         return trim($this->apiUrl . '/' . $this->apiKey . '/' . urlencode($this->locationNameQuery));
     }
 
-    /**
-     * @return string raw api response
-     */
-    public function getRawResponse()
-    {
-        $requestUrl = $this->getRequestUrl();
-        $rawResponse = file_get_contents($requestUrl);
-        return $rawResponse;
-    }
+
 }

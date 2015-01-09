@@ -1,0 +1,68 @@
+{
+   "results" : [
+      {
+         "address_components" : [
+            {
+               "long_name" : "3212",
+               "short_name" : "3212",
+               "types" : [ "street_number" ]
+            },
+            {
+               "long_name" : "Duke Street",
+               "short_name" : "Duke St",
+               "types" : [ "route" ]
+            },
+            {
+               "long_name" : "Taylor Run",
+               "short_name" : "Taylor Run",
+               "types" : [ "neighborhood", "political" ]
+            },
+            {
+               "long_name" : "Alexandria",
+               "short_name" : "Alexandria",
+               "types" : [ "locality", "political" ]
+            },
+            {
+               "long_name" : "Virginia",
+               "short_name" : "VA",
+               "types" : [ "administrative_area_level_1", "political" ]
+            },
+            {
+               "long_name" : "United States",
+               "short_name" : "US",
+               "types" : [ "country", "political" ]
+            },
+            {
+               "long_name" : "22314",
+               "short_name" : "22314",
+               "types" : [ "postal_code" ]
+            },
+            {
+               "long_name" : "4521",
+               "short_name" : "4521",
+               "types" : [ "postal_code_suffix" ]
+            }
+         ],
+         "formatted_address" : "3212 Duke Street, Alexandria, VA 22314, USA",
+         "geometry" : {
+            "location" : {
+               "lat" : 38.8077552,
+               "lng" : -77.0860138
+            },
+            "location_type" : "ROOFTOP",
+            "viewport" : {
+               "northeast" : {
+                  "lat" : 38.80910418029149,
+                  "lng" : -77.08466481970851
+               },
+               "southwest" : {
+                  "lat" : 38.8064062197085,
+                  "lng" : -77.08736278029151
+               }
+            }
+         },
+         "types" : [ "street_address" ]
+      }
+   ],
+   "status" : "OK"
+}

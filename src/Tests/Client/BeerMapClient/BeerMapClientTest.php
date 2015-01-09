@@ -48,10 +48,11 @@ class BeerMapClientTest extends BeerMapClientBaseTest
     {
         $location = '3212 duke street';
         self :: $client->setLocation($location);
+
         $this->assertEquals(
             self :: $client->locationNameQuery,
             $location,
-            'Unexpeected location query'
+            'Unexpected location query'
         );
     }
 
@@ -75,7 +76,7 @@ class BeerMapClientTest extends BeerMapClientBaseTest
         $this->assertNotNull(self :: $beerMapResponseFixture);
 
         $this->assertEquals(
-            get_class(self :: $beerMapResponse), 'Response\BeerMapResponse',
+            get_class(self :: $beerMapResponse), 'Response\BeerMapClientResponse\BeerMapClientResponse',
             'Response isnt of expected type Response\BeerMapResponse'
         );
     }

@@ -12,6 +12,9 @@
         <testsuite name="API Client">
             <directory>src/Tests/Client/</directory>
         </testsuite>
+        <testsuite name="API Client Response">
+            <directory>src/Tests/Response/</directory>
+        </testsuite>
     </testsuites>
 
 </phpunit>

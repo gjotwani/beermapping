@@ -6,24 +6,12 @@ abstract Class ApiClient implements ApiClientInterface
     /**
      * @var string
      */
-    private $apiKey;
+    protected $apiKey;
 
     /**
      * @var string
      */
-    private $apiUrl;
-
-    /**
-     * Magic getter
-     * for class properties
-     *
-     * @param string $name property name
-     * @return mixed property value
-     */
-    public function __get($name)
-    {
-        return property_exists(__CLASS__, $name) ? $this->{$name} : false;
-    }
+    protected $apiUrl;
 
     /**
      * Factory for Apiclients
@@ -35,6 +23,7 @@ abstract Class ApiClient implements ApiClientInterface
     public static function getClient($clientName)
     {
         $clientLocation = __DIR__ . '/'. $clientName . '/' . $clientName . '.php';
+
         if (file_exists($clientLocation)) {
             include_once($clientLocation);
             $ns = __NAMESPACE__ . "\\$clientName\\$clientName";
@@ -44,6 +33,7 @@ abstract Class ApiClient implements ApiClientInterface
             throw new \InvalidArgumentException("Client of type $clientName not found", 1);
         }
     }
+
     /**
      * @return string raw api response
      */

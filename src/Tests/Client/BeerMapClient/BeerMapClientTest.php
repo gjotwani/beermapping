@@ -52,7 +52,7 @@ class BeerMapClientTest extends BeerMapClientBaseTest
         $this->assertEquals(
             self :: $client->locationNameQuery,
             $location,
-            'Unexpeected location query'
+            'Unexpected location query'
         );
     }
 

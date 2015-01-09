@@ -55,12 +55,22 @@ class BeerMapClient extends ApiClient implements BeerMapClientInterface
     }
 
     /**
+     * Magic getter
+     * for class properties
+     *
+     * @param string $name property name
+     * @return mixed property value
+     */
+    public function __get($name)
+    {
+        return property_exists(get_class($this), $name) ? $this->{$name} : false;
+    }
+
+    /**
      * @return string url for request
      */
     public function getRequestUrl()
     {
         return trim($this->apiUrl . '/' . $this->apiKey . '/' . urlencode($this->locationNameQuery));
     }
-
-
 }

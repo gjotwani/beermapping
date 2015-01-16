@@ -10,7 +10,7 @@ class BeerMapClientResponseTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         $beerMapResponseFixture = file_get_contents(__DIR__ . "/../../Fixtures/BeerMapClientResponse.xml");
-        self :: $beerMapResponse = new BeerMapClientResponse($beerMapResponseFixture);
+        self :: $beerMapResponse = new BeerMapClientResponse($beerMapResponseFixture, 'Alexandria');
     }
 
     /**

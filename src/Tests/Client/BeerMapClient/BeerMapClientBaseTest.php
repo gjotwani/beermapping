@@ -36,7 +36,7 @@ class BeerMapClientBaseTest extends \PHPUnit_Framework_TestCase
         self :: $client->setApiKey('not-my-api-key');
         self :: $client->setApiUrl('http://beermapping.com/webservice/loccity');
         self :: $beerMapResponseFixture = file_get_contents(__DIR__ . "/../../Fixtures/BeerMapClientResponse.xml");
-        self :: $beerMapResponse = new BeerMapClientResponse(self :: $beerMapResponseFixture);
+        self :: $beerMapResponse = new BeerMapClientResponse(self :: $beerMapResponseFixture, 'Alexandria');
     }
 
     /**

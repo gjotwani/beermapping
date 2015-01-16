@@ -52,6 +52,11 @@ abstract Class ApiClient implements ApiClientInterface
         $this->httpClient = $httpClient;
     }
 
+    public function getHttpClient()
+    {
+        return $this->httpClient;
+    }
+
     /**
      * @return string raw api response
      *

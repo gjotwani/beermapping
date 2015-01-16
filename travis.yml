@@ -1,0 +1,15 @@
+language: php
+
+php:
+  - 5.4
+  - 5.5
+
+install:
+  - travis_retry composer install --no-interaction --prefer-source
+
+script:
+  - phpunit
+
+branches:
+  only:
+    - master

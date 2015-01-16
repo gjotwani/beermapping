@@ -27,4 +27,6 @@ interface ApiClientInterface
     public function getRequestUrl();
 
     public function setHttpClient($client);
+
+    public function getHttpClient();
 }

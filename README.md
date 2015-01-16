@@ -1,4 +1,4 @@
-beermapping
+beermapping [![Build Status](https://travis-ci.org/gjotwani/beermapping.svg)](https://travis-ci.org/gjotwani/beermapping)
 ===========
 
 Beermapping and google geocode api

@@ -46,11 +46,13 @@ abstract Class ApiClient implements ApiClientInterface
     public function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
+        return $this;
     }
 
     public function setApiUrl($apiUrl)
     {
         $this->apiUrl = $apiUrl;
+        return $this;
     }
 
     abstract function getRequestUrl();

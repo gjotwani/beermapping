@@ -44,7 +44,7 @@ class BeerMapClient extends ApiClient implements BeerMapClientInterface
     {
         $requestUrl = $this->getRequestUrl();
         $rawResponse = $this->getRawResponse($requestUrl);
-        $responseObject = new BeerMapClientResponse($rawResponse, $this->geoCodeClient);
+        $responseObject = new BeerMapClientResponse($rawResponse, $this->locationNameQuery, $this->geoCodeClient);
 
         return $responseObject;
     }

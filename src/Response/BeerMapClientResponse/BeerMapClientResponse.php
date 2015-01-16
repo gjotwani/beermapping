@@ -6,11 +6,14 @@ class BeerMapClientResponse
 {
     private $rawResponse;
     private $geoCodeClient;
+    private $locationQuery;
 
-    public function __construct($rawResponse, $geoCodeClient = false)
+    public function __construct($rawResponse, $locationQuery, $geoCodeClient = false)
     {
         $this->rawResponse = $rawResponse;
         $this->geoCodeClient = $geoCodeClient;
+        $this->locationQuery = $locationQuery;
+
     }
 
     public function setGeoCodeClient($geoCodeClient)
@@ -33,45 +36,52 @@ class BeerMapClientResponse
         $this->xmlDomDoc = new \DOMDocument('1.0');
         $this->xmlDomDoc->formatOutput = true;
         $this->xmlDomDoc->preserveWhiteSpace = false;
-        $this->xmlDomDoc->loadXML($this->rawResponse);
-
         $processedLocations = array();
 
-        $locationGeoCodeParams = $this->getLocationGeoCodeParams();
+        if (strlen($this->rawResponse)) {
 
-        //http://stackoverflow.com/questions/5882433/how-get-first-level-of-dom-elements-by-domdocument-php
-        if ($this->xmlDomDoc->hasChildNodes()) {
+            $this->xmlDomDoc->loadXML($this->rawResponse);
+            $locationGeoCodeParams = $this->getLocationGeoCodeParams();
 
-            $rootChildren = $this->xmlDomDoc->childNodes;
-            $bmp_locations = $rootChildren->item(0);
+            //http://stackoverflow.com/questions/5882433/how-get-first-level-of-dom-elements-by-domdocument-php
+            if ($this->xmlDomDoc->hasChildNodes()) {
 
-            $bmp_locations->hasChildNodes();
-            $locations = $bmp_locations->childNodes;
+                $rootChildren = $this->xmlDomDoc->childNodes;
+                $bmp_locations = $rootChildren->item(0);
 
-            foreach ($locations as $location) {
-                $locationNameQuery = null;
-                $processedLocation = array();
-                $locationAttributes = $location->childNodes;
+                $bmp_locations->hasChildNodes();
+                $locations = $bmp_locations->childNodes;
 
-                foreach ($location->childNodes as $childNode) {
+                foreach ($locations as $location) {
+                    $locationNameQuery = null;
+                    $processedLocation = array();
+                    $locationAttributes = $location->childNodes;
 
-                    $processedLocation[$childNode->nodeName] = $childNode->nodeValue;
+                    foreach ($location->childNodes as $childNode) {
 
-                    if (in_array($childNode->nodeName, $locationGeoCodeParams)) {
-                        $locationNameQuery.= ' '.$childNode->nodeValue;
+                        $processedLocation[$childNode->nodeName] = $childNode->nodeValue;
+
+                        if (in_array($childNode->nodeName, $locationGeoCodeParams)) {
+                            $locationNameQuery.= ' '.$childNode->nodeValue;
+                        }
+
                     }
 
-                }
+                    if (method_exists($this->geoCodeClient, 'getGeoLocation')) {
+                        $this->processGeoCodeInfo($locationNameQuery, $processedLocation);
+                    }
 
-                if (method_exists($this->geoCodeClient, 'getGeoLocation')) {
-                    $this->processGeoCodeInfo($locationNameQuery, $processedLocation);
+                    $processedLocations[] = $processedLocation;
                 }
-
-                $processedLocations[] = $processedLocation;
             }
         }
 
-        return $processedLocations;
+        $processedResponse = array();
+        $processedResponse['description'] = "Brewery Listings for {$this->locationQuery}";
+        $processedResponse['numFound'] = count($processedLocations);
+        $processedResponse['payload'] = $processedLocations;
+
+        return $processedResponse;
     }
 
     public function processGeoCodeInfo($locationNameQuery, &$processedLocation)
@@ -85,11 +95,16 @@ class BeerMapClientResponse
         }
     }
 
-    public function __toString()
+    public function asJson()
     {
         header('Content-Type: application/json');
         $locations = $this->getBreweries();
-        return json_encode($locations);
+        return json_encode($locations, true);
     }
 
+    public function asArray()
+    {
+        $locations = $this->getBreweries();
+        return $locations;
+    }
 }

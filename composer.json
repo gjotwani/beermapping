@@ -1,5 +1,8 @@
 {
     "autoload": {
         "psr-0": { "": "src/" }
+    },
+    "require": {
+        "guzzlehttp/guzzle": "~5.0"
     }
 }

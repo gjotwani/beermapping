@@ -10,7 +10,7 @@ class BeerMapClientResponseTest extends \PHPUnit_Framework_TestCase
     public static function setUpBeforeClass()
     {
         $beerMapResponseFixture = file_get_contents(__DIR__ . "/../../Fixtures/BeerMapClientResponse.xml");
-        self :: $beerMapResponse = new BeerMapClientResponse($beerMapResponseFixture);
+        self :: $beerMapResponse = new BeerMapClientResponse($beerMapResponseFixture, 'Alexandria');
     }
 
     /**
@@ -31,11 +31,16 @@ class BeerMapClientResponseTest extends \PHPUnit_Framework_TestCase
     /**
      * Test Client BeerMap response object
      */
-    public function testGetLocations()
+    public function testResponseContents()
     {
-        $breweries = self :: $beerMapResponse->getBreweries();
-        $this->assertGreaterThan(0, count($breweries));
+        $response = self :: $beerMapResponse->asArray();
 
+        $this->assertArrayHasKey("description", $response);
+        $this->assertArrayHasKey("numFound", $response);
+        $this->assertArrayHasKey("payload", $response);
+        $this->assertGreaterThan(20, count($response["payload"]));
+
+        $breweries = $response["payload"];
         for ($i = 0; $i < 3; $i++) {
             $this->assertArrayHasKey('id', $breweries[$i]);
             $this->assertNotNull('name', $breweries[$i]);

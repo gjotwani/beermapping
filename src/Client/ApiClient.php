@@ -1,5 +1,6 @@
 <?php
 namespace Client;
+use GuzzleHttp\Client;
 
 abstract Class ApiClient implements ApiClientInterface
 {
@@ -14,6 +15,15 @@ abstract Class ApiClient implements ApiClientInterface
     protected $apiUrl;
 
     /**
+     * A generic http
+     * client for request reponse
+     * to end api points
+     *
+     * @var object
+     */
+    protected $httpClient;
+
+    /**
      * Factory for Apiclients
      *
      * @param string client name
@@ -22,24 +32,39 @@ abstract Class ApiClient implements ApiClientInterface
      */
     public static function getClient($clientName)
     {
+
         $clientLocation = __DIR__ . '/'. $clientName . '/' . $clientName . '.php';
 
         if (file_exists($clientLocation)) {
             include_once($clientLocation);
             $ns = __NAMESPACE__ . "\\$clientName\\$clientName";
             $client = new $ns();
+            $httpClient = new Client();
+            $client->setHttpClient($httpClient);
             return $client;
         } else {
             throw new \InvalidArgumentException("Client of type $clientName not found", 1);
         }
     }
 
+    public function setHttpClient($httpClient)
+    {
+        $this->httpClient = $httpClient;
+    }
+
     /**
      * @return string raw api response
+     *
      */
     public function getRawResponse($requestUrl)
     {
-        $rawResponse = file_get_contents($requestUrl);
+        try {
+            $response = $this->httpClient->get($requestUrl);
+        } catch (\GuzzleHttp\Exception\ClientException $e) {
+            echo $e->getMessage();
+        }
+
+        $rawResponse = $response->getBody();
         return $rawResponse;
     }
 

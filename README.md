@@ -3,8 +3,6 @@ beermapping [![Build Status](https://travis-ci.org/gjotwani/beermapping.svg)](ht
 
 Beermapping and google geocode api
 
-# beermapping
-
 Clients to access Beermap Api listings and related details details.
 
 **Requirements:**

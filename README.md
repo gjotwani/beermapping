@@ -11,7 +11,6 @@ Clients to access Beermap Api listings and related details details.
 
 * Composer
 * php (>= 5.3)
-* PDO Extension
 * phpunit
 * An internet connection.
 
@@ -20,7 +19,7 @@ Clients to access Beermap Api listings and related details details.
 * Clone repo using command:
 
 ** git clone https://github.com/gjotwani/beermapping.git
-will clone into $cwd/virtualshipper
+will clone into $cwd/beermapping
 
 * Run composer install:
 
